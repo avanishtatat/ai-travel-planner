@@ -10,7 +10,7 @@ const callGemini = async (prompt) => {
     throw new Error("GEMINI_API_KEY is not defined in environment variables");
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`;
 
   const data = await retryFetch(
     url,
@@ -43,16 +43,16 @@ const callGemini = async (prompt) => {
 };
 
 const generateTripPlan = async (tripInput) => {
-    const prompt = createTripPrompt(tripInput);
-    return await callGemini(prompt);
-}
+  const prompt = createTripPrompt(tripInput);
+  return await callGemini(prompt);
+};
 
 const regenerateDayPlan = async ({ trip, dayNumber, instruction }) => {
-    const prompt = createRegenerateDayPrompt({ trip, dayNumber, instruction });
-    return await callGemini(prompt);    
-}
+  const prompt = createRegenerateDayPrompt({ trip, dayNumber, instruction });
+  return await callGemini(prompt);
+};
 
 module.exports = {
-    generateTripPlan,
-    regenerateDayPlan,
+  generateTripPlan,
+  regenerateDayPlan,
 };

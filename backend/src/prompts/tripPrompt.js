@@ -86,9 +86,8 @@ const createTripPrompt = (tripInput) => {
     - Use numbers only for cost fields.`;
 };
 
-
 const createRegenerateDayPrompt = ({ trip, dayNumber, instruction }) => {
-    return `
+  return `
     You are an expert AI travel planner.
 
     Regenerate ONLY Day ${dayNumber} for this trip.
