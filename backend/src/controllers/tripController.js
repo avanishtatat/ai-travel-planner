@@ -192,11 +192,12 @@ const deleteTrip = asyncHandler(async (req, res) => {
 const getDashboardStats = asyncHandler(async (req, res) => {
   const today = new Date();
   
-  const [totalTrips, upcomingTrips, visitedCountries, nextTrip] = await Promise.all([
+  const [totalTrips, upcomingTrips, visitedCountries, nextTrip, recentTrips] = await Promise.all([
     Trip.countDocuments({ userId: req.user._id }),
     Trip.countDocuments({ userId: req.user._id, startDate: { $gte: today } }),
     Trip.distinct("destination", { userId: req.user._id, startDate: { $lt: today } }),
     Trip.findOne({ userId: req.user._id, startDate: { $gte: today } }).sort({ startDate: 1 }).select("destination startDate numberOfDays"),
+    Trip.find({ userId: req.user._id, startDate: { $lt: today } }).sort({ startDate: -1 }).limit(3).select("destination startDate numberOfDays budgetType travelStyle createdAt"),
   ]);
   
   return res.status(200).json({
@@ -207,6 +208,7 @@ const getDashboardStats = asyncHandler(async (req, res) => {
       visitedCountriesCount: visitedCountries.length,
       visitedCountries,
       nextTrip,
+      recentTrips,
     },
   });
 });
