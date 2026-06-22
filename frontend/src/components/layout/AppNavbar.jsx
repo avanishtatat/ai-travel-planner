@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, Compass, LayoutDashboard, LogOut, Plane, Route } from "lucide-react";
+import {
+  Bell,
+  Compass,
+  LayoutDashboard,
+  LogOut,
+  Plane,
+  Route,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -61,16 +68,14 @@ export default function AppNavbar() {
         <nav className="hidden items-center gap-1 rounded-full bg-slate-100 p-1 md:flex">
           {navLinks.map((item) => {
             const Icon = item.icon;
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/dashboard" && pathname.startsWith(item.href));
+            const isActive = (href) =>  pathname === href;
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-                  isActive
+                  isActive(item.href)
                     ? "bg-white text-indigo-700 shadow-sm"
                     : "text-slate-500 hover:text-slate-900"
                 }`}
@@ -124,18 +129,14 @@ export default function AppNavbar() {
         <nav className="grid grid-cols-3 gap-2">
           {navLinks.map((item) => {
             const Icon = item.icon;
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/dashboard" && pathname.startsWith(item.href));
+            const isActive = (href) => pathname === href;
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`flex flex-col items-center rounded-xl px-2 py-2 text-xs font-medium ${
-                  isActive
-                    ? "bg-indigo-50 text-indigo-700"
-                    : "text-slate-500"
+                  isActive(item.href) ? "bg-indigo-50 text-indigo-700" : "text-slate-500"
                 }`}
               >
                 <Icon className="mb-1 h-4 w-4" />
