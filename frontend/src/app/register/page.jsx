@@ -9,6 +9,7 @@ import AuthLayout from "@/components/layout/AuthLayout";
 import AuthForm from "@/components/forms/AuthForm";
 import { registerUser } from "@/services/authService";
 import { useAuth } from "@/context/AuthContext";
+import PublicRoute from "@/components/shared/PublicRoute";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -31,18 +32,20 @@ export default function RegisterPage() {
   };
 
   return (
-    <AuthLayout
-      title="Create your account"
-      subtitle="Start generating AI-powered travel plans"
-    >
-      <AuthForm isRegister loading={loading} onSubmit={handleRegister} />
+    <PublicRoute>
+      <AuthLayout
+        title="Create your account"
+        subtitle="Start generating AI-powered travel plans"
+      >
+        <AuthForm isRegister loading={loading} onSubmit={handleRegister} />
 
-      <p className="mt-6 text-center text-sm text-slate-500">
-        Already have an account?{" "}
-        <Link href="/login" className="font-medium text-slate-900">
-          Login
-        </Link>
-      </p>
-    </AuthLayout>
+        <p className="mt-6 text-center text-sm text-slate-500">
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-slate-900">
+            Login
+          </Link>
+        </p>
+      </AuthLayout>
+    </PublicRoute>
   );
 }

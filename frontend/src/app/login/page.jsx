@@ -9,6 +9,7 @@ import AuthLayout from "@/components/layout/AuthLayout";
 import AuthForm from "@/components/forms/AuthForm";
 import { loginUser } from "@/services/authService";
 import { useAuth } from "@/context/AuthContext";
+import PublicRoute from "@/components/shared/PublicRoute";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -34,18 +35,20 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthLayout
-      title="Welcome back"
-      subtitle="Login to continue planning your trips"
-    >
-      <AuthForm loading={loading} onSubmit={handleLogin} />
+    <PublicRoute>
+      <AuthLayout
+        title="Welcome back"
+        subtitle="Login to continue planning your trips"
+      >
+        <AuthForm loading={loading} onSubmit={handleLogin} />
 
-      <p className="mt-6 text-center text-sm text-slate-500">
-        Don&apos;t have an account?{" "}
-        <Link href="/register" className="font-medium text-slate-900">
-          Create one
-        </Link>
-      </p>
-    </AuthLayout>
+        <p className="mt-6 text-center text-sm text-slate-500">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="font-medium text-slate-900">
+            Create one
+          </Link>
+        </p>
+      </AuthLayout>
+    </PublicRoute>
   );
 }
