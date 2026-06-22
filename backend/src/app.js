@@ -3,8 +3,8 @@ const cors = require("cors");
 
 require('dotenv').config();
 
-// const authRoutes = require('./routes/authRoutes');
-// const tripRoutes = require('./routes/tripRoutes');
+const authRoutes = require('./routes/authRoutes.js');
+// const tripRoutes = require('./routes/tripRoutes.js');
 
 const app = express();
 
@@ -18,11 +18,14 @@ app.get('/', (req, res) => {
     res.send('VoyageMind API is running');
 })
 
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 // app.use('/api/trips', tripRoutes);
 
 app.use((err, req, res, next) => {
-    console.error(err);
+    console.error(err.stack);
+    if (err.name === 'ValidationError') {
+        return res.status(400).json({ success: false, message: err.errors[Object.keys(err.errors)[0]].message });
+    }
     res.status(500).json({ success: false,message: 'Internal Server Error' });
 });
 
