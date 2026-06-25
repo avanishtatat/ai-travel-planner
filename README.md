@@ -1,6 +1,7 @@
 # ✈️ VoyageMind AI – AI Travel Planner
 
-> A full-stack, multi-user AI travel planner that generates complete day-by-day itineraries, budget estimates, hotel suggestions, and safety tips — powered by Google Gemini.
+> VoyageMind AI is designed as a SaaS-style travel planning product, not just an itinerary generator. It focuses on multi-user trip management, secure data isolation, editable AI-generated plans, budget estimation, hotel suggestions, and destination-specific safety guidance.
+
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=flat-square&logo=vercel)](https://ai-travel-planner-beta-orpin.vercel.app/)
 [![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat-square&logo=render)](https://ai-travel-planner-1vpd.onrender.com/)
